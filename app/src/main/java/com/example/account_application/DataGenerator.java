@@ -1,5 +1,5 @@
-/*
-*工具类
+/**
+ * 工具类
  */
 package com.example.account_application;
 
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 public class DataGenerator {
-
+    // 把tab栏的图片存放在数组里面
     public static final int []mTabRes = new int[]{R.drawable.tab1,R.drawable.tab2,R.drawable.tab3};
     public static final int []mTabResPressed = new int[]{R.drawable.tab1,R.drawable.tab2,R.drawable.tab3};
     public static final String []mTabTitle = new String[]{"首页","商城","消息"};

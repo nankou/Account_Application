@@ -1,99 +1,113 @@
 package com.example.account_application;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.account_application.MySQLite.MySQLiteOpenHelper;
+import com.example.account_application.Service.ClassService;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private TabLayout tab_layout;
-    private Fragment[] framensts;
+    private ServiceConnection conn;
+    private ClassService.MyBinder binder;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private boolean flag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_layout);
+        setContentView(R.layout.activity_main);
 
-        framensts = DataGenerator.getFragments();
-        initView();
+        ActivityCompat.requestPermissions(this, new String[]{"android.permission.READ_EXTERNAL_STORAGE"}, 1);
+        if(flag==true){
+            playMusic();
+        }
+        flag=false;
     }
 
-    private void initView() {
-        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
+    // 登录逻辑
+    public void Login(View view) {
+        String name = ((EditText) findViewById(R.id.loginame)).getText().toString();
+        String password = ((EditText) findViewById(R.id.loginpassword)).getText().toString();
+        //获得登录用户填写的信息
+        MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "mydb.db", null, 1);
+        SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
+        //从用户名来判断是否在用户表存在该用户
+        Cursor cursor = database.query("users", new String[] { "id", "name" , "password"}, "name=?", new String[] { name }, null, null, null);
 
+        String id=null;
+        String s1=null;
 
-        //设置监听器
-        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                onTabItemSelected(tab.getPosition());
+        while (cursor.moveToNext()) {
+            //若存在该信息将其id和password读取出来
+            s1 = cursor.getString(cursor.getColumnIndex("password"));
+            id = String.valueOf(cursor.getInt(cursor.getColumnIndex("id")));
+        }
 
-                // Tab 选中之后，改变各个Tab的状态
-                for (int i = 0; i < tab_layout.getTabCount(); i++) {
-                    View view = tab_layout.getTabAt(i).getCustomView();
-                    ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
-                    TextView text = (TextView) view.findViewById(R.id.tab_content_text);
+        //判断密码是否相同，且是否存在该用户
+        if(password.equals(s1)){
+            database.close();
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, ClassesActivity.class);
+            intent.putExtra("id", id);
+            intent.putExtra("name",name);
+            startActivity(intent);
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
 
-                    if (i == tab.getPosition()) { // 选中状态，修改字体颜色和图片，背景未实现
-//                        view.setBackgroundColor(Color.parseColor("#a9a9a9"));
-                        icon.setImageResource(DataGenerator.mTabResPressed[i]);
-                        icon.setMaxHeight(10);
-                        icon.setMaxWidth(10);
-                        text.setTextColor(getResources().getColor(android.R.color.black));
-                    } else {// 未选中状态
-//                        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                        icon.setImageResource(DataGenerator.mTabRes[i]);
-                        icon.setMaxHeight(10);
-                        icon.setMaxWidth(10);
-                        text.setTextColor(getResources().getColor(android.R.color.darker_gray));
-                    }
+        }else{
+            database.close();
+            Toast.makeText(getApplicationContext(),"用户名不存在或密码错误",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // 注册跳转
+    public void register(View view) {
+        startActivity(new Intent(getApplicationContext(), Register.class));
+    }
+
+    //
+    public void playMusic() {
+
+        if (binder == null) {
+            conn = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    binder = (ClassService.MyBinder) service;
+                    binder.play();
                 }
-            }
-
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        // 提供自定义的布局添加Tab，注意此处的加载页面需要在设置Listener之后，不然会导致第一次点击事件失效
-        for(int i=0;i<3;i++){
-            tab_layout.addTab(tab_layout.newTab().setCustomView(DataGenerator.getTabView(this,i)));
-        }
-
-        //默认进入首页（需放在加载页面之后）
-        tab_layout.getTabAt(0).select();
-    }
-
-    private void onTabItemSelected(int position){
-        Fragment frag = null;
-        switch (position){
-            case 0:
-                frag = framensts[0];
-                break;
-            case 1:
-                frag = framensts[1];
-                break;
-
-            case 2:
-                frag = framensts[2];
-                break;
-        }
-        //替换fragment
-        if(frag!=null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_container,frag).commit();
+                @Override
+                public void onServiceDisconnected(ComponentName name) {}
+            };
+            bindService(new Intent(this, ClassService.class), conn, BIND_AUTO_CREATE);
+        } else {
+            binder.resumeMusic();
         }
     }
+    public void pauseMusic() {
+        binder.pauseMusic();
+    }
+
+    public void play(View view) {
+        playMusic();
+    }
+
+    public void stop(View view) {
+        pauseMusic();
+    }
+
 }
 
