@@ -9,7 +9,7 @@
         android:id="@+id/list_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="listFragment"
+        android:text="listCounter"
         tools:layout_editor_absoluteX="184dp"
         tools:layout_editor_absoluteY="344dp" />
 </LinearLayout>

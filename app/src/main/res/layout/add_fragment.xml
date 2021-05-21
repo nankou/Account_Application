@@ -9,7 +9,7 @@
         android:id="@+id/add_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="addFragment"
+        android:text="addCounter"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="352dp" />
 </LinearLayout>
