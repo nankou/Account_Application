@@ -1,4 +1,4 @@
-package com.example.account_application;
+ package com.example.account_application;
 
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -24,7 +24,7 @@ public class ClassesActivity extends AppCompatActivity {
     private boolean flag=true;
 
     private String id;
-    private  String name;
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +108,7 @@ public class ClassesActivity extends AppCompatActivity {
         }
     }
 
+    // 首页显示
     private void show() {
         MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "mydb.db", null, 1);
         SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();

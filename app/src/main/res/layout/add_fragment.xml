@@ -1,15 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context="com.example.account_application.ClassesActivity">
 
-    <TextView
-        android:id="@+id/add_layout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="addCounter"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="352dp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/carsum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/textstyle1"
+            android:text="总金额：" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/textstyle1"
+            android:text="用处：" />
+
+        <EditText
+            android:id="@+id/carapply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/textstyle1"
+            android:text="金额：" />
+
+        <EditText
+            android:id="@+id/carcost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="exit"
+            android:text="返回" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="刷新"
+            android:onClick="refresh"
+            android:layout_marginLeft="40dp"/>
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="添加"
+            android:onClick="add"
+            android:layout_marginLeft="40dp" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listcar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
