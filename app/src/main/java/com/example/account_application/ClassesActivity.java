@@ -1,16 +1,20 @@
  package com.example.account_application;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.account_application.MySQLite.MySQLiteOpenHelper;
 import com.google.android.material.tabs.TabLayout;
@@ -19,9 +23,11 @@ public class ClassesActivity extends AppCompatActivity {
     private TabLayout tab_layout;
     private Fragment[] framensts;
 
+
     private ServiceConnection conn;
     private static final String TAG = MainActivity.class.getSimpleName();
     private boolean flag=true;
+
 
     private String id;
     private String name;
@@ -31,7 +37,7 @@ public class ClassesActivity extends AppCompatActivity {
         setContentView(R.layout.tab_layout);
 
         framensts = DataGenerator.getFragments();
-        initView();
+        initView();  // 初始化tab栏
 
     }
 
@@ -88,6 +94,7 @@ public class ClassesActivity extends AppCompatActivity {
     }
 
     // 切换tab栏
+    @SuppressLint("DefaultLocale")
     private void onTabItemSelected(int position){
         Fragment frag = null;
         switch (position){
@@ -104,7 +111,35 @@ public class ClassesActivity extends AppCompatActivity {
         }
         //替换fragment
         if(frag!=null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_container,frag).commit();
+            MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "db", null, 1);
+            SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
+            Cursor cursor = database.rawQuery("select password from car where id =?",new String[]{"123"});
+            int sum =  cursor.getInt(cursor.getColumnIndex("0"));
+
+//            Cursor cursor = database.query("car", new String[]{"cost"}, "idname=?",new String[]{id},null,null,null);
+//            double sum=0;
+//            while(cursor.moveToNext()){
+//                sum+=cursor.getDouble(0);
+//            }
+//            cursor = database.query("food", new String[]{"cost"}, "idname=?",new String[]{id},null,null,null);
+//            while(cursor.moveToNext()){
+//                sum+=cursor.getDouble(0);
+//            }
+//            cursor = database.query("shopping", new String[]{"cost"}, "idname=?",new String[]{id},null,null,null);
+//            while(cursor.moveToNext()){
+//                String s3 = cursor.getString(0);
+//                sum+=cursor.getDouble(0);
+//            }
+            database.close();
+
+            // 利用Bundle传送数据
+            Bundle bundle = new Bundle();
+            bundle.putString("sum",String.format("%.2f", sum));
+            framensts[2].setArguments(bundle);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_container,frag).commit();  // 切换fragment
+
+
         }
     }
 
@@ -126,29 +161,35 @@ public class ClassesActivity extends AppCompatActivity {
             String s3 = cursor.getString(0);
             sum+=cursor.getDouble(0);
         }
+
         database.close();
         ((TextView) findViewById(R.id.allsum)).setText("￥"+ String.format("%.2f", sum));
+
+
+        // 传递数据给fragment
+
+
     }
 
-    public void foodbill(View view) {
-        Intent intent = new Intent();
-        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
-
-    public void travelbill(View view) {
-        Intent intent = new Intent();
-        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
-        intent.putExtra("id", id);
-        startActivity(intent);;
-    }
-
-    public void shoppingbill(View view) {
-        Intent intent = new Intent();
-        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
+//    public void foodbill(View view) {
+//        Intent intent = new Intent();
+//        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+//    }
+//
+//    public void travelbill(View view) {
+//        Intent intent = new Intent();
+//        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);;
+//    }
+//
+//    public void shoppingbill(View view) {
+//        Intent intent = new Intent();
+//        intent.setClass(com.example.account_application.ClassesActivity.this, AddFragment.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+//    }
 
 }
