@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.finalworks.R;
-import com.example.administrator.finalworks.bean.Car;
+import com.example.account_application.Consume.CarActivity;
+import com.example.account_application.bean.Car;
+import com.example.account_application.R;
+import com.example.account_application.bean.Car;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class MyAdaptercar extends BaseAdapter {
         this.context = applicationContext;
         this.listener =listener;
     }
+
+
 
     @Override
     public int getCount() {

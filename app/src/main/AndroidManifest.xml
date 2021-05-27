@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Consume.FoodActivity" android:label="饮食"/>
+        <activity android:name=".Consume.CarActivity"  android:label="出行" />
+        <activity android:name=".Consume.ShoppingActivity"  android:label="购物" />
+
     </application>
 
 </manifest>

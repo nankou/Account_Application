@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.finalworks.R;
-import com.example.administrator.finalworks.bean.Food;
+import com.example.account_application.Consume.FoodActivity;
+import com.example.account_application.bean.Food;
+import com.example.account_application.R;
+import com.example.account_application.bean.Food;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
  */
 
 public class MyAdapterfood extends BaseAdapter {
-    private static final String TAG = com.example.administrator.finalworks.Adapter.MyAdapterfood.class.getSimpleName();
+    private static final String TAG = com.example.account_application.Adapter.MyAdapterfood.class.getSimpleName();
     private List<Food> foods;
     private Context context;
     private final View.OnClickListener listener;
@@ -27,6 +29,7 @@ public class MyAdapterfood extends BaseAdapter {
         this.context = applicationContext;
         this.listener =listener;
     }
+
 
     @Override
     public int getCount() {
