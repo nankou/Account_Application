@@ -113,8 +113,8 @@ public class ClassesActivity extends AppCompatActivity {
         if(frag!=null) {
             MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "db", null, 1);
             SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
-            Cursor cursor = database.rawQuery("select password from car where id =?",new String[]{"123"});
-            int sum =  cursor.getInt(cursor.getColumnIndex("0"));
+//            Cursor cursor = database.query("car", new String[] { "id", "name" , "password"}, "name=?", new String[] { name }, null, null, null);
+//            int sum =  cursor.getInt(cursor.getColumnIndex("0"));
 
 //            Cursor cursor = database.query("car", new String[]{"cost"}, "idname=?",new String[]{id},null,null,null);
 //            double sum=0;
@@ -131,10 +131,13 @@ public class ClassesActivity extends AppCompatActivity {
 //                sum+=cursor.getDouble(0);
 //            }
             database.close();
+            Intent intent = getIntent();
+            String data  = intent.getStringExtra("name");
 
             // 利用Bundle传送数据
             Bundle bundle = new Bundle();
-            bundle.putString("sum",String.format("%.2f", sum));
+//            bundle.putString("sum",String.format("%.2f", sum));
+            bundle.putString("name",data);
             framensts[2].setArguments(bundle);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.home_container,frag).commit();  // 切换fragment
