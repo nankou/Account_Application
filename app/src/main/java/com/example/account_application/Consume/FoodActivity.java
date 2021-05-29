@@ -105,7 +105,7 @@ public class FoodActivity extends AppCompatActivity implements  View.OnClickList
         }
         myAdapterfood.notifyDataSetChanged();
         database.close();
-        ((TextView) findViewById(R.id.foodsum)).setText("饮食总金额：" + String.format("%.2f", sum)+"￥");
+        ((TextView) findViewById(R.id.foodsum)).setText("饮食总金额：￥" + String.format("%.2f", sum));
     }
 
     public void refresh(View view) {
@@ -124,7 +124,7 @@ public class FoodActivity extends AppCompatActivity implements  View.OnClickList
                 final Food food = foods.get(position);
                 //点击删除按钮之后，给出dialog提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(FoodActivity.this);
-                builder.setTitle( position + "号位置的删除按钮被点击，确认删除?");
+                builder.setTitle("该条记录即将被删除，确认删除?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

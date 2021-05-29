@@ -122,7 +122,7 @@ public class CarActivity extends AppCompatActivity implements View.OnClickListen
                 final Car car = cars.get(position);
                 //点击删除按钮之后，给出dialog提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(CarActivity.this);
-                builder.setTitle(position + "号位置的删除按钮被点击，确认删除?");
+                builder.setTitle("该条记录即将被删除，确认删除?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -103,7 +103,7 @@ public class ShoppingActivity extends AppCompatActivity implements View.OnClickL
         }
         myAdaptershopping.notifyDataSetChanged();
         database.close();
-        ((TextView) findViewById(R.id.shoppingsum)).setText("购物总金额：" + String.format("%.2f", sum)+"￥");
+        ((TextView) findViewById(R.id.shoppingsum)).setText("购物总金额：￥" + String.format("%.2f", sum));
     }
 
     public void refresh(View view) {
@@ -122,7 +122,7 @@ public class ShoppingActivity extends AppCompatActivity implements View.OnClickL
                 final Shopping shopping = (Shopping) shops.get(position);
                 //点击删除按钮之后，给出dialog提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShoppingActivity.this);
-                builder.setTitle(position + "号位置的删除按钮被点击，确认删除?");
+                builder.setTitle("该条记录即将被删除，确认删除?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

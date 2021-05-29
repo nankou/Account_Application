@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/textstyle1"
-            android:text="用处：" />
+            android:text="用途备注：" />
 
         <EditText
             android:id="@+id/foodapply"
@@ -82,8 +82,8 @@
 
         <Button
             android:id="@+id/button14"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@drawable/refesh_item"
             android:onClick="refresh"
             android:layout_marginLeft="40dp" />
@@ -91,13 +91,29 @@
 
         <Button
             android:id="@+id/button12"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:background="@drawable/add_item"
             android:onClick="add"
             android:layout_marginLeft="40dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="130dp"
+            android:text="饮食账单列表"
+            android:layout_weight="1"
+            style="@style/textstyle1"
+            />
+    </LinearLayout>
     <ListView
         android:id="@+id/listfood"
         android:layout_width="match_parent"
