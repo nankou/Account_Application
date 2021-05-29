@@ -49,7 +49,6 @@ public class Register extends AppCompatActivity {
             ContentValues values = new ContentValues();
             values.put("name", name);
             values.put("password", password);
-            //        database.execSQL("insert into users (name, age) values ('Jin Jie', 32)");
             database.insert("users", null, values);
             Toast.makeText(getApplicationContext(),"注册成功",Toast.LENGTH_SHORT).show();
             database.close();

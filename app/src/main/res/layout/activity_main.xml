@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="110dp">
 
         <TextView
             android:id="@+id/textView3"
             style="@style/textstyle1"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="80dp"
             android:layout_weight="1"
             android:text="用户名：" />
 
@@ -50,7 +50,7 @@
             style="@style/textstyle1"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="80dp"
             android:layout_weight="0.92"
             android:text="密码:" />
 

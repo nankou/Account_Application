@@ -53,22 +53,24 @@ public class CarActivity extends AppCompatActivity implements View.OnClickListen
         finish();
     }
 
+
+    // 添加账单
     public void add(View view) {
         MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "mydb.db", null, 1);
         SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
         String apply = ((EditText) findViewById(R.id.carapply)).getText().toString();
         String cost = ((EditText) findViewById(R.id.carcost)).getText().toString();
 
-        if("".equals(apply)||"".equals(cost)){
+        if("".equals(apply)||"".equals(cost)){     // 判断输入信息是否为空
             Toast.makeText(getApplicationContext(),"用途或者金额不能为空", Toast.LENGTH_SHORT).show();
-        }else if(!isNumeric(cost)){
+        }else if(!isNumeric(cost)){  // 判断是否为合法数值
             Toast.makeText(getApplicationContext(),"确保金额为数字", Toast.LENGTH_SHORT).show();
         }else{
             ContentValues values = new ContentValues();
             values.put("apply", apply);
             values.put("cost", cost);
             values.put("idname", id);
-            database.insert("car", null, values);
+            database.insert("car", null, values);  // 插入数据库
             ((EditText) findViewById(R.id.carapply)).setText("");
             ((EditText) findViewById(R.id.carcost)).setText("");
         }
@@ -83,6 +85,8 @@ public class CarActivity extends AppCompatActivity implements View.OnClickListen
         }
         return true;
     }
+
+
     public void show(){
         MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "mydb.db", null, 1);
         SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
@@ -106,6 +110,7 @@ public class CarActivity extends AppCompatActivity implements View.OnClickListen
         ((TextView) findViewById(R.id.carsum)).setText("出行总金额：" +"￥"+ String.format("%.2f", sum));
     }
 
+    // 刷新账单
     public void refresh(View view) {
         Button button = findViewById(R.id.button13);
         ObjectAnimator animator = ObjectAnimator.ofFloat(button, "rotation", 0f, 360f, 720f);
@@ -114,6 +119,7 @@ public class CarActivity extends AppCompatActivity implements View.OnClickListen
         show();
     }
 
+    // 删除账单
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 数据库
  */
 
-public class MySQLiteOpenHelper extends SQLiteOpenHelper {
+public class  MySQLiteOpenHelper extends SQLiteOpenHelper {
     public MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -17,8 +17,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table users(id integer primary key autoincrement,name text, password text);");
-//        db.execSQL("create table list(id integer primary key autoincrement,idname text, apply text, cost real, type double);");
-//        db.execSQL("INSERT into list(id,idname,apply,cost,type) VALUES (202001,\"idname\",\"买吃的\",\"1202\",\"零食\");");
+        db.execSQL("create table list(id integer primary key autoincrement,idname text, apply text, cost real, type double);");
         db.execSQL("create table food(id integer primary key autoincrement,idname text, apply text, cost real);");
         db.execSQL("create table car(id integer primary key autoincrement,idname text, apply text, cost real);");
         db.execSQL("create table shopping(id integer primary key autoincrement,idname text, apply text, cost real);");

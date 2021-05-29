@@ -57,10 +57,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/button6"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
-        android:id="@+id/button6"
         android:onClick="foodbill"
         android:padding="10dp">
 
@@ -86,12 +86,13 @@
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_send" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:onClick="shoppingbill"
-        android:id="@+id/button5"
         android:padding="10dp">
 
         <ImageView
@@ -116,11 +117,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:onClick="travelbill"
-        android:id="@+id/button4"
         android:padding="10dp">
 
         <ImageView

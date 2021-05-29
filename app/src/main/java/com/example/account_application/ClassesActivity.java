@@ -39,8 +39,6 @@ public class ClassesActivity extends AppCompatActivity {
         show();
     }
 
-
-
     private void show() {
         MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(getApplicationContext(), "mydb.db", null, 1);
         SQLiteDatabase database = mySQLiteOpenHelper.getWritableDatabase();
