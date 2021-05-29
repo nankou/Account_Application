@@ -5,18 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.account_application.Consume.CarActivity">
+    tools:context="com.example.account_application.Consume.CarActivity"
+    android:background="@drawable/background"
+    android:padding="10dp"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:text="添加账单"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            style="@style/textstyle1"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/sum" />
 
         <TextView
             android:id="@+id/carsum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
             style="@style/textstyle1"
             android:text="总金额：" />
     </LinearLayout>
@@ -24,13 +47,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/use" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
             style="@style/textstyle1"
             android:text="用途备注：" />
 
@@ -46,13 +78,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/account" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
             style="@style/textstyle1"
             android:text="金额：" />
 
@@ -70,13 +109,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:background="@drawable/return_login"
-            android:onClick="exit"  />
 
         <Button
             android:id="@+id/button13"
@@ -84,14 +116,14 @@
             android:layout_height="45dp"
             android:background="@drawable/refesh_item"
             android:onClick="refresh"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginLeft="140dp"/>
         <Button
             android:id="@+id/button12"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:background="@drawable/add_item"
             android:onClick="add"
-            android:layout_marginLeft="40dp" />
+            android:layout_marginLeft="20dp" />
 
     </LinearLayout>
 
